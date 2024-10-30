@@ -1,35 +1,48 @@
 import 'package:flutter/material.dart';
+import '../../widget/mediaquery.dart';
 import '../course_view/listofcourse.dart';
 import '../staff_view/stafflist_view.dart';
 import 'widget/gridview_widget.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final bool isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final double stackHeight = isLandscape 
+        ? mediaqueryheight(0.6, context)
+        : mediaqueryheight(0.3, context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
-        title: const Text('Timetable Application'),
+        title: Text(
+          'Timetable Application',
+          style: TextStyle(
+            fontSize: mediaquerywidth(0.05, context),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-              height: 240,
+              height: stackHeight,
               child: Stack(
                 children: [
                   Container(
-                    height: 240,
+                    height: stackHeight,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       color: Colors.orange,
                     ),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12)),
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                      ),
                       child: Image.network(
                         'https://img.freepik.com/premium-vector/students-immerse-themselves-books-sharing-insights-ideas-colorful-learning-environment-education-learning-concept-likes-read-people-read-students-study_538213-157433.jpg?semt=ais_hybrid',
                         width: double.infinity,
@@ -40,9 +53,13 @@ class HomeScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                      margin: EdgeInsets.symmetric(
+                        horizontal: mediaquerywidth(0.05, context),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: mediaquerywidth(0.04, context),
+                        vertical: mediaqueryheight(0.015, context),
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -70,20 +87,24 @@ class HomeScreen extends StatelessWidget {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.book,
-                                      size: 32, color: Colors.orange),
-                                  const SizedBox(height: 4),
+                                  Icon(
+                                    Icons.book,
+                                    size: mediaquerywidth(0.08, context),
+                                    color: Colors.orange,
+                                  ),
+                                  SizedBox(height: mediaqueryheight(0.01, context)),
                                   Text(
                                     'Course',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      fontSize: mediaquerywidth(0.04, context),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ),
                           Container(
-                            height: 40,
+                            height: mediaqueryheight(0.05, context),
                             width: 1,
                             color: Colors.grey[300],
                           ),
@@ -100,13 +121,17 @@ class HomeScreen extends StatelessWidget {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.person,
-                                      size: 32, color: Colors.orange),
-                                  const SizedBox(height: 4),
+                                  Icon(
+                                    Icons.person,
+                                    size: mediaquerywidth(0.08, context),
+                                    color: Colors.orange,
+                                  ),
+                                  SizedBox(height: mediaqueryheight(0.01, context)),
                                   Text(
                                     'Staff',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      fontSize: mediaquerywidth(0.04, context),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -119,7 +144,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: mediaqueryheight(0.025, context)),
             gridview(),
           ],
         ),

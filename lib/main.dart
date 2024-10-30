@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Colors.white,
           fontFamily: 'DMSans',
+          appBarTheme: const AppBarTheme(color: Colors.white),
           scaffoldBackgroundColor: Colors.white),
       home:const HomeScreen(),
     );
